@@ -696,6 +696,7 @@ CREATE TABLE `t_market_tracking` (
   `activity_id` varchar(45) DEFAULT NULL,
   `channel` varchar(45) DEFAULT NULL,
   `raw_url` varchar(250) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `index2` (`activity_id`,`channel`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
