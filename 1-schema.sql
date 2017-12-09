@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `schoolpal` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `schoolpal`;
--- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.24, for osx10.8 (x86_64)
 --
--- Host: localhost    Database: schoolpal
+-- Host: 39.106.40.83    Database: schoolpal
 -- ------------------------------------------------------
--- Server version	5.7.17-log
+-- Server version	5.7.19
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -49,75 +49,6 @@ CREATE TABLE `t_activity` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `t_course_type`
---
-
-DROP TABLE IF EXISTS `t_course_type`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_course_type` (
-  `id` int(10) NOT NULL,
-  `name` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `t_course_prototype`
---
-
-DROP TABLE IF EXISTS `t_course_prototype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_course_prototype` (
-  `id` int(10) NOT NULL,
-  `name` varchar(45) DEFAULT NULL,
-  `type` int(2) DEFAULT NULL,
-  `hours` decimal(4,2) DEFAULT NULL,
-  `times` int(11) DEFAULT NULL,
-  `status` int(1) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_t_course_prototype_t_course_type1_idx` (`type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `t_course_session`
---
-
-DROP TABLE IF EXISTS `t_course_session`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_course_session` (
-  `id` int(11) NOT NULL,
-  `proto_id` int(11) DEFAULT NULL,
-  `name` varchar(45) DEFAULT NULL,
-  `type` varchar(45) DEFAULT NULL,
-  `hours` decimal(4,2) DEFAULT NULL,
-  `start_date` date DEFAULT NULL,
-  `end_date` date DEFAULT NULL,
-  `times` int(11) DEFAULT NULL,
-  `status` int(1) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_t_course_t_course_prototype1_idx` (`proto_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `t_widget_type`
---
-
-DROP TABLE IF EXISTS `t_widget_type`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_widget_type` (
-  `c_id` int(11) NOT NULL AUTO_INCREMENT,
-  `c_name` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`c_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `t_command_type`
 --
 
@@ -129,216 +60,7 @@ CREATE TABLE `t_command_type` (
   `c_code` varchar(50) DEFAULT NULL,
   `c_name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`c_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `t_function`
---
-
-DROP TABLE IF EXISTS `t_function`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_function` (
-  `c_id` char(50) NOT NULL,
-  `c_root_id` varchar(50) DEFAULT NULL,
-  `c_parent_id` varchar(50) DEFAULT NULL,
-  `c_name_short` varchar(50) DEFAULT NULL,
-  `c_name_long` varchar(50) DEFAULT NULL,
-  `c_action` varchar(255) DEFAULT NULL,
-  `c_widget_type_id` int(11) DEFAULT NULL,
-  `c_order_num` int(11) DEFAULT NULL,
-  `c_icon` varchar(50) DEFAULT NULL,
-  `c_command_type_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`c_id`),
-  KEY `c_order` (`c_order_num`),
-  KEY `c_root_id` (`c_root_id`,`c_order_num`),
-  KEY `c_parent_id` (`c_parent_id`,`c_order_num`),
-  KEY `fk_t_function_t_widget_type1_idx` (`c_widget_type_id`),
-  KEY `fk_t_function_t_command_type1_idx` (`c_command_type_id`),
-  KEY `c_action` (`c_action`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `t_id_type`
---
-
-DROP TABLE IF EXISTS `t_id_type`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_id_type` (
-  `id` int(1) NOT NULL,
-  `name` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `t_leads_type`
---
-
-DROP TABLE IF EXISTS `t_leads_type`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_leads_type` (
-  `id` int(1) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `t_leads_source`
---
-
-DROP TABLE IF EXISTS `t_leads_source`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_leads_source` (
-  `id` int(2) NOT NULL AUTO_INCREMENT,
-  `type` int(2) NOT NULL,
-  `name` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `type_idx` (`type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `t_leads_stage`
---
-
-DROP TABLE IF EXISTS `t_leads_stage`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_leads_stage` (
-  `id` int(2) NOT NULL AUTO_INCREMENT,
-  `type` int(2) NOT NULL,
-  `name` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `type_idx` (`type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `t_leads_status`
---
-
-DROP TABLE IF EXISTS `t_leads_status`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_leads_status` (
-  `id` int(2) NOT NULL AUTO_INCREMENT,
-  `type` int(2) NOT NULL,
-  `name` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `type_idx` (`type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `t_leads`
---
-
-DROP TABLE IF EXISTS `t_leads`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_leads` (
-  `id` char(50) NOT NULL,
-  `student_id` char(50) DEFAULT NULL,
-  `parent_id` char(50) DEFAULT NULL,
-  `type_id` int(2) DEFAULT NULL,
-  `org_id` char(50) DEFAULT NULL,
-  `source_id` int(2) DEFAULT NULL,
-  `channel_id` char(50) DEFAULT NULL,
-  `stage_id` int(2) DEFAULT NULL,
-  `status_id` int(2) DEFAULT NULL,
-  `course_type` varchar(45) DEFAULT NULL,
-  `course_name` varchar(45) DEFAULT NULL,
-  `creator_id` char(50) DEFAULT NULL,
-  `create_time` datetime NOT NULL,
-  `executive_id` char(50) DEFAULT NULL,
-  `last_update` datetime NOT NULL,
-  `note` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `type_id_idx` (`type_id`),
-  KEY `org_type_exec_idx` (`org_id`,`type_id`,`executive_id`),
-  KEY `student_id_idx` (`source_id`),
-  KEY `parent_id_idx` (`parent_id`),
-  KEY `source_id_idx` (`source_id`),
-  KEY `channel_id_idx` (`channel_id`),
-  KEY `stage_id_idx` (`stage_id`),
-  KEY `status_id_idx` (`status_id`),
-  KEY `creator_idx` (`creator_id`),
-  KEY `executive_idx` (`executive_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `t_leads_student`
---
-
-DROP TABLE IF EXISTS `t_leads_student`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_leads_student` (
-  `id` char(50) NOT NULL,
-  `name` varchar(45) DEFAULT NULL,
-  `gender_id` int(1) DEFAULT NULL,
-  `id_type` int(1) DEFAULT NULL,
-  `id_code` varchar(45) DEFAULT NULL,
-  `birthday` date DEFAULT NULL,
-  `school_grade` varchar(45) DEFAULT NULL,
-  `class_grade` varchar(45) DEFAULT NULL,
-  `school_name` varchar(45) DEFAULT NULL,
-  `creator_id` char(50) DEFAULT NULL,
-  `create_time` datetime NOT NULL,
-  `last_update` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `creator_id_idx` (`creator_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `t_leads_parent`
---
-
-DROP TABLE IF EXISTS `t_leads_parent`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_leads_parent` (
-  `id` char(50) NOT NULL,
-  `name` varchar(45) DEFAULT NULL,
-  `gender_id` int(1) DEFAULT NULL,
-  `cellphone` varchar(45) DEFAULT NULL,
-  `wechat` varchar(45) DEFAULT NULL,
-  `email` varchar(45) DEFAULT NULL,
-  `address` varchar(200) DEFAULT NULL,
-  `id_type` int(1) DEFAULT NULL,
-  `id_code` varchar(45) DEFAULT NULL,
-  `birthday` date DEFAULT NULL,
-  `creator_id` char(50) DEFAULT NULL,
-  `create_time` datetime NOT NULL,
-  `last_update` datetime NOT NULL,
-  `relation` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `c_cellphone` (`cellphone`),
-  KEY `creator_id_idx` (`creator_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `t_contact_approach`
---
-
-DROP TABLE IF EXISTS `t_contact_approach`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_contact_approach` (
-  `id` int(2) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -359,6 +81,20 @@ CREATE TABLE `t_contact` (
   KEY `executive_id` (`executive_id`),
   KEY `leads_id` (`leads_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_contact_approach`
+--
+
+DROP TABLE IF EXISTS `t_contact_approach`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_contact_approach` (
+  `id` int(2) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -420,13 +156,185 @@ CREATE TABLE `t_contract` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `t_parent`
+-- Table structure for table `t_course_prototype`
 --
 
-DROP TABLE IF EXISTS `t_parent`;
+DROP TABLE IF EXISTS `t_course_prototype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_parent` (
+CREATE TABLE `t_course_prototype` (
+  `id` int(10) NOT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `type` int(2) DEFAULT NULL,
+  `hours` decimal(4,2) DEFAULT NULL,
+  `times` int(11) DEFAULT NULL,
+  `status` int(1) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_t_course_prototype_t_course_type1_idx` (`type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_course_session`
+--
+
+DROP TABLE IF EXISTS `t_course_session`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_course_session` (
+  `id` int(11) NOT NULL,
+  `proto_id` int(11) DEFAULT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `type` varchar(45) DEFAULT NULL,
+  `hours` decimal(4,2) DEFAULT NULL,
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `times` int(11) DEFAULT NULL,
+  `status` int(1) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_t_course_t_course_prototype1_idx` (`proto_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_course_type`
+--
+
+DROP TABLE IF EXISTS `t_course_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_course_type` (
+  `id` int(10) NOT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_crm_audit`
+--
+
+DROP TABLE IF EXISTS `t_crm_audit`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_crm_audit` (
+  `id` bigint(20) NOT NULL,
+  `table` varchar(45) DEFAULT NULL,
+  `prime_id` char(50) DEFAULT NULL,
+  `action_user_id` char(50) DEFAULT NULL,
+  `action_type` varchar(45) DEFAULT NULL,
+  `action_time` datetime DEFAULT NULL,
+  `old_value` text,
+  `new_value` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_function`
+--
+
+DROP TABLE IF EXISTS `t_function`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_function` (
+  `c_id` char(50) NOT NULL,
+  `c_root_id` varchar(50) DEFAULT NULL,
+  `c_parent_id` varchar(50) DEFAULT NULL,
+  `c_name_short` varchar(50) DEFAULT NULL,
+  `c_name_long` varchar(50) DEFAULT NULL,
+  `c_action` varchar(255) DEFAULT NULL,
+  `c_widget_type_id` int(11) DEFAULT NULL,
+  `c_order_num` int(11) DEFAULT NULL,
+  `c_icon` varchar(50) DEFAULT NULL,
+  `c_command_type_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`c_id`),
+  KEY `c_order` (`c_order_num`),
+  KEY `c_root_id` (`c_root_id`,`c_order_num`),
+  KEY `c_parent_id` (`c_parent_id`,`c_order_num`),
+  KEY `fk_t_function_t_widget_type1_idx` (`c_widget_type_id`),
+  KEY `fk_t_function_t_command_type1_idx` (`c_command_type_id`),
+  KEY `c_action` (`c_action`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_id_type`
+--
+
+DROP TABLE IF EXISTS `t_id_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_id_type` (
+  `id` int(1) NOT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_index`
+--
+
+DROP TABLE IF EXISTS `t_index`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_index` (
+  `c_table` varchar(50) NOT NULL,
+  `c_prefix` varchar(50) DEFAULT NULL,
+  `c_current` bigint(20) unsigned DEFAULT NULL,
+  `c_step` int(11) DEFAULT NULL,
+  `c_bits` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`c_table`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_leads`
+--
+
+DROP TABLE IF EXISTS `t_leads`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_leads` (
+  `id` char(50) NOT NULL,
+  `student_id` char(50) DEFAULT NULL,
+  `parent_id` char(50) DEFAULT NULL,
+  `type_id` int(2) DEFAULT NULL,
+  `org_id` char(50) DEFAULT NULL,
+  `source_id` int(2) DEFAULT NULL,
+  `channel_id` char(50) DEFAULT NULL,
+  `stage_id` int(2) DEFAULT NULL,
+  `status_id` int(2) DEFAULT NULL,
+  `course_type` varchar(45) DEFAULT NULL,
+  `course_name` varchar(45) DEFAULT NULL,
+  `creator_id` char(50) DEFAULT NULL,
+  `create_time` datetime NOT NULL,
+  `executive_id` char(50) DEFAULT NULL,
+  `last_update` datetime NOT NULL,
+  `note` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `type_id_idx` (`type_id`),
+  KEY `org_type_exec_idx` (`org_id`,`type_id`,`executive_id`),
+  KEY `student_id_idx` (`source_id`),
+  KEY `parent_id_idx` (`parent_id`),
+  KEY `source_id_idx` (`source_id`),
+  KEY `channel_id_idx` (`channel_id`),
+  KEY `stage_id_idx` (`stage_id`),
+  KEY `status_id_idx` (`status_id`),
+  KEY `creator_idx` (`creator_id`),
+  KEY `executive_idx` (`executive_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_leads_parent`
+--
+
+DROP TABLE IF EXISTS `t_leads_parent`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_leads_parent` (
   `id` char(50) NOT NULL,
   `name` varchar(45) DEFAULT NULL,
   `gender_id` int(1) DEFAULT NULL,
@@ -437,26 +345,73 @@ CREATE TABLE `t_parent` (
   `id_type` int(1) DEFAULT NULL,
   `id_code` varchar(45) DEFAULT NULL,
   `birthday` date DEFAULT NULL,
-  `executive_id` char(50) DEFAULT NULL,
   `creator_id` char(50) DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `last_update` datetime DEFAULT NULL,
+  `create_time` datetime NOT NULL,
+  `last_update` datetime NOT NULL,
+  `relation` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `cellphone_idx` (`cellphone`),
-  UNIQUE KEY `id_type_code_UNIQUE` (`id_type`,`id_code`)
+  KEY `c_cellphone` (`cellphone`),
+  KEY `creator_id_idx` (`creator_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `t_student`
+-- Table structure for table `t_leads_source`
 --
 
-DROP TABLE IF EXISTS `t_student`;
+DROP TABLE IF EXISTS `t_leads_source`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_student` (
+CREATE TABLE `t_leads_source` (
+  `id` int(2) NOT NULL AUTO_INCREMENT,
+  `type` int(2) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `type_idx` (`type`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_leads_stage`
+--
+
+DROP TABLE IF EXISTS `t_leads_stage`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_leads_stage` (
+  `id` int(2) NOT NULL AUTO_INCREMENT,
+  `type` int(2) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `type_idx` (`type`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_leads_status`
+--
+
+DROP TABLE IF EXISTS `t_leads_status`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_leads_status` (
+  `id` int(2) NOT NULL AUTO_INCREMENT,
+  `type` int(2) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `type_idx` (`type`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_leads_student`
+--
+
+DROP TABLE IF EXISTS `t_leads_student`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_leads_student` (
   `id` char(50) NOT NULL,
-  `code` varchar(45) DEFAULT NULL,
   `name` varchar(45) DEFAULT NULL,
   `gender_id` int(1) DEFAULT NULL,
   `id_type` int(1) DEFAULT NULL,
@@ -465,29 +420,65 @@ CREATE TABLE `t_student` (
   `school_grade` varchar(45) DEFAULT NULL,
   `class_grade` varchar(45) DEFAULT NULL,
   `school_name` varchar(45) DEFAULT NULL,
-  `executive_id` char(50) DEFAULT NULL,
   `creator_id` char(50) DEFAULT NULL,
   `create_time` datetime NOT NULL,
   `last_update` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `code_UNIQUE` (`code`),
-  KEY `id_type_code` (`id_type`,`id_code`)
+  KEY `creator_id_idx` (`creator_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `t_parent`
+-- Table structure for table `t_leads_type`
 --
 
-DROP TABLE IF EXISTS `t_par_stu`;
+DROP TABLE IF EXISTS `t_leads_type`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_par_stu` (
-  `par_id` char(50) NOT NULL,
-  `stu_id` char(50) NOT NULL,
-  `relation` varchar(45) NOT NULL,
-  PRIMARY KEY (`par_id`, `stu_id`)
+CREATE TABLE `t_leads_type` (
+  `id` int(1) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_log`
+--
+
+DROP TABLE IF EXISTS `t_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_log` (
+  `c_id` char(50) NOT NULL,
+  `c_creator` char(50) DEFAULT NULL,
+  `c_create_time` datetime DEFAULT NULL,
+  `c_type` varchar(50) DEFAULT NULL,
+  `c_title` varchar(50) DEFAULT NULL,
+  `c_desc` varchar(2048) DEFAULT NULL,
+  `c_debug` text,
+  `c_service_ip` varchar(50) DEFAULT NULL,
+  `c_user_ip` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`c_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_market_tracking`
+--
+
+DROP TABLE IF EXISTS `t_market_tracking`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_market_tracking` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `activity_id` varchar(45) DEFAULT NULL,
+  `channel` varchar(45) DEFAULT NULL,
+  `raw_url` varchar(250) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index2` (`activity_id`,`channel`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -532,58 +523,63 @@ CREATE TABLE `t_org` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `t_user`
+-- Table structure for table `t_par_stu`
 --
 
-DROP TABLE IF EXISTS `t_user`;
+DROP TABLE IF EXISTS `t_par_stu`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_user` (
-  `c_id` char(50) NOT NULL,
-  `c_loginname` varchar(50) NOT NULL,
-  `c_loginpass` varchar(50) DEFAULT NULL,
-  `c_realname` varchar(50) DEFAULT NULL,
-  `c_nickname` varchar(50) DEFAULT NULL,
-  `c_phone` varchar(50) DEFAULT NULL,
-  `c_email` varchar(50) DEFAULT NULL,
-  `c_qq` varchar(50) DEFAULT NULL,
-  `c_available` tinyint(1) DEFAULT NULL,
-  `c_org_id` char(50) DEFAULT NULL,
-  `c_org_root_id` char(50) DEFAULT NULL,
-  `c_creator` char(50) DEFAULT NULL,
-  `c_create_time` datetime NOT NULL,
-  `c_last_visit_time` datetime DEFAULT NULL,
-  `c_last_visit_ip` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`c_id`),
-  UNIQUE KEY `c_username_UNIQUE` (`c_loginname`),
-  KEY `c_nickname` (`c_nickname`),
-  KEY `c_org_id` (`c_org_id`),
-  KEY `c_org_root_id` (`c_org_root_id`,`c_org_id`),
-  KEY `c_creator` (`c_creator`),
-  KEY `c_realname` (`c_realname`),
-  KEY `c_email` (`c_email`),
-  KEY `c_qq` (`c_qq`)
+CREATE TABLE `t_par_stu` (
+  `par_id` char(50) NOT NULL,
+  `stu_id` char(50) NOT NULL,
+  `relation` varchar(45) NOT NULL,
+  PRIMARY KEY (`par_id`,`stu_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `t_user_role`
+-- Table structure for table `t_parent`
 --
 
-DROP TABLE IF EXISTS `t_user_role`;
+DROP TABLE IF EXISTS `t_parent`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_user_role` (
-  `c_user_id` char(50) NOT NULL,
-  `c_role_id` char(50) NOT NULL,
-  `c_available` tinyint(1) DEFAULT NULL,
-  `c_creator` char(50) DEFAULT NULL,
-  `c_create_time` datetime DEFAULT NULL,
-  PRIMARY KEY (`c_user_id`,`c_role_id`),
-  KEY `c_role_id` (`c_role_id`),
-  KEY `fk_t_user_role_t_role1_idx` (`c_role_id`),
-  KEY `fk_t_user_role_t_user1_idx` (`c_user_id`)
+CREATE TABLE `t_parent` (
+  `id` char(50) NOT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `gender_id` int(1) DEFAULT NULL,
+  `cellphone` varchar(45) DEFAULT NULL,
+  `wechat` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `address` varchar(200) DEFAULT NULL,
+  `id_type` int(1) DEFAULT NULL,
+  `id_code` varchar(45) DEFAULT NULL,
+  `birthday` date DEFAULT NULL,
+  `executive_id` char(50) DEFAULT NULL,
+  `creator_id` char(50) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `last_update` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_type_code_UNIQUE` (`id_type`,`id_code`),
+  KEY `cellphone_idx` (`cellphone`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_rank`
+--
+
+DROP TABLE IF EXISTS `t_rank`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_rank` (
+  `c_id` int(11) NOT NULL AUTO_INCREMENT,
+  `c_name` varchar(50) DEFAULT NULL,
+  `c_order_num` int(11) DEFAULT NULL,
+  PRIMARY KEY (`c_id`),
+  KEY `c_name` (`c_name`),
+  KEY `c_order` (`c_order_num`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -648,96 +644,100 @@ CREATE TABLE `t_role_function_exclude` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `t_rank`
+-- Table structure for table `t_student`
 --
 
-DROP TABLE IF EXISTS `t_rank`;
+DROP TABLE IF EXISTS `t_student`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_rank` (
-  `c_id` int(11) NOT NULL AUTO_INCREMENT,
-  `c_name` varchar(50) DEFAULT NULL,
-  `c_order_num` int(11) DEFAULT NULL,
-  PRIMARY KEY (`c_id`),
-  KEY `c_name` (`c_name`),
-  KEY `c_order` (`c_order_num`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `t_crm_audit`
---
-
-DROP TABLE IF EXISTS `t_crm_audit`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_crm_audit` (
-  `id` bigint(20) NOT NULL,
-  `table` varchar(45) DEFAULT NULL,
-  `prime_id` char(50) DEFAULT NULL,
-  `action_user_id` char(50) DEFAULT NULL,
-  `action_type` varchar(45) DEFAULT NULL,
-  `action_time` datetime DEFAULT NULL,
-  `old_value` text,
-  `new_value` text,
-  PRIMARY KEY (`id`)
+CREATE TABLE `t_student` (
+  `id` char(50) NOT NULL,
+  `code` varchar(45) DEFAULT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `gender_id` int(1) DEFAULT NULL,
+  `id_type` int(1) DEFAULT NULL,
+  `id_code` varchar(45) DEFAULT NULL,
+  `birthday` date DEFAULT NULL,
+  `school_grade` varchar(45) DEFAULT NULL,
+  `class_grade` varchar(45) DEFAULT NULL,
+  `school_name` varchar(45) DEFAULT NULL,
+  `executive_id` char(50) DEFAULT NULL,
+  `creator_id` char(50) DEFAULT NULL,
+  `create_time` datetime NOT NULL,
+  `last_update` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `code_UNIQUE` (`code`),
+  KEY `id_type_code` (`id_type`,`id_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `t_market_tracking`
+-- Table structure for table `t_user`
 --
 
-DROP TABLE IF EXISTS `t_market_tracking`;
+DROP TABLE IF EXISTS `t_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_market_tracking` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `activity_id` varchar(45) DEFAULT NULL,
-  `channel` varchar(45) DEFAULT NULL,
-  `raw_url` varchar(250) DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `index2` (`activity_id`,`channel`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+CREATE TABLE `t_user` (
+  `c_id` char(50) NOT NULL,
+  `c_loginname` varchar(50) NOT NULL,
+  `c_loginpass` varchar(50) DEFAULT NULL,
+  `c_realname` varchar(50) DEFAULT NULL,
+  `c_nickname` varchar(50) DEFAULT NULL,
+  `c_phone` varchar(50) DEFAULT NULL,
+  `c_email` varchar(50) DEFAULT NULL,
+  `c_qq` varchar(50) DEFAULT NULL,
+  `c_available` tinyint(1) DEFAULT NULL,
+  `c_org_id` char(50) DEFAULT NULL,
+  `c_org_root_id` char(50) DEFAULT NULL,
+  `c_creator` char(50) DEFAULT NULL,
+  `c_create_time` datetime NOT NULL,
+  `c_last_visit_time` datetime DEFAULT NULL,
+  `c_last_visit_ip` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`c_id`),
+  UNIQUE KEY `c_username_UNIQUE` (`c_loginname`),
+  KEY `c_nickname` (`c_nickname`),
+  KEY `c_org_id` (`c_org_id`),
+  KEY `c_org_root_id` (`c_org_root_id`,`c_org_id`),
+  KEY `c_creator` (`c_creator`),
+  KEY `c_realname` (`c_realname`),
+  KEY `c_email` (`c_email`),
+  KEY `c_qq` (`c_qq`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `t_log`
+-- Table structure for table `t_user_role`
 --
 
-DROP TABLE IF EXISTS `t_log`;
+DROP TABLE IF EXISTS `t_user_role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_log` (
-  `c_id` char(50) NOT NULL,
+CREATE TABLE `t_user_role` (
+  `c_user_id` char(50) NOT NULL,
+  `c_role_id` char(50) NOT NULL,
+  `c_available` tinyint(1) DEFAULT NULL,
   `c_creator` char(50) DEFAULT NULL,
   `c_create_time` datetime DEFAULT NULL,
-  `c_type` varchar(50) DEFAULT NULL,
-  `c_title` varchar(50) DEFAULT NULL,
-  `c_desc` varchar(2048) DEFAULT NULL,
-  `c_debug` text,
-  `c_service_ip` varchar(50) DEFAULT NULL,
-  `c_user_ip` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`c_id`)
+  PRIMARY KEY (`c_user_id`,`c_role_id`),
+  KEY `c_role_id` (`c_role_id`),
+  KEY `fk_t_user_role_t_role1_idx` (`c_role_id`),
+  KEY `fk_t_user_role_t_user1_idx` (`c_user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `t_index`
+-- Table structure for table `t_widget_type`
 --
 
-DROP TABLE IF EXISTS `t_index`;
+DROP TABLE IF EXISTS `t_widget_type`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_index` (
-  `c_table` varchar(50) NOT NULL,
-  `c_prefix` varchar(50) DEFAULT NULL,
-  `c_current` bigint(20) unsigned DEFAULT NULL,
-  `c_step` int(11) DEFAULT NULL,
-  `c_bits` tinyint(4) DEFAULT NULL,
-  PRIMARY KEY (`c_table`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `t_widget_type` (
+  `c_id` int(11) NOT NULL AUTO_INCREMENT,
+  `c_name` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`c_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -813,4 +813,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-23 21:11:54
+-- Dump completed on 2017-12-09 23:19:50
