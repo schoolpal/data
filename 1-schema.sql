@@ -120,7 +120,7 @@ CREATE TABLE `t_contract` (
   `final_price` decimal(16,2) DEFAULT NULL,
   `paid` decimal(16,2) DEFAULT NULL,
   `course_type` varchar(45) DEFAULT NULL,
-  `course_ori_id` int(1) DEFAULT NULL,
+  `course_prd_id` int(1) DEFAULT NULL,
   `course_ses_id` int(1) DEFAULT NULL,
   `course_hours` varchar(45) DEFAULT NULL,
   `course_times` varchar(45) DEFAULT NULL,
@@ -149,7 +149,7 @@ CREATE TABLE `t_contract` (
   UNIQUE KEY `code_UNIQUE` (`code`),
   KEY `type` (`type`),
   KEY `course_type` (`course_type`),
-  KEY `course_ori_id` (`course_ori_id`),
+  KEY `course_prd_id` (`course_prd_id`),
   KEY `course_ses_id` (`course_ses_id`),
   KEY `stu_id` (`stu_id`),
   KEY `par_id` (`par_id`),
@@ -161,21 +161,21 @@ CREATE TABLE `t_contract` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `t_course_prototype`
+-- Table structure for table `t_course_product`
 --
 
-DROP TABLE IF EXISTS `t_course_prototype`;
+DROP TABLE IF EXISTS `t_course_product`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_course_prototype` (
-  `id` int(10) NOT NULL,
-  `name` varchar(45) DEFAULT NULL,
-  `type` int(2) DEFAULT NULL,
+CREATE TABLE `t_course_product` (
+  `id` char(50) NOT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `type_id` int(10) DEFAULT NULL,
   `hours` decimal(4,2) DEFAULT NULL,
   `times` int(11) DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_t_course_prototype_t_course_type1_idx` (`type`)
+  KEY `fk_t_course_product_t_course_type1_idx` (`type_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -187,17 +187,17 @@ DROP TABLE IF EXISTS `t_course_session`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `t_course_session` (
-  `id` int(11) NOT NULL,
-  `proto_id` int(11) DEFAULT NULL,
-  `name` varchar(45) DEFAULT NULL,
-  `type` varchar(45) DEFAULT NULL,
+  `id` char(50) NOT NULL,
+  `product_id` char(50) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `type_name` varchar(45) DEFAULT NULL,
   `hours` decimal(4,2) DEFAULT NULL,
   `start_date` date DEFAULT NULL,
   `end_date` date DEFAULT NULL,
   `times` int(11) DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_t_course_t_course_prototype1_idx` (`proto_id`)
+  KEY `fk_t_course_t_course_product1_idx` (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -209,10 +209,11 @@ DROP TABLE IF EXISTS `t_course_type`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `t_course_type` (
-  `id` int(10) NOT NULL,
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
