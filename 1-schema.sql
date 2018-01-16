@@ -119,9 +119,9 @@ CREATE TABLE `t_contract` (
   `disc_price` decimal(16,2) DEFAULT NULL,
   `final_price` decimal(16,2) DEFAULT NULL,
   `paid` decimal(16,2) DEFAULT NULL,
+  `course_id` char(50) DEFAULT NULL,
+  `course_name` varchar(100) DEFAULT NULL,
   `course_type` varchar(45) DEFAULT NULL,
-  `course_prd_id` int(1) DEFAULT NULL,
-  `course_ses_id` int(1) DEFAULT NULL,
   `course_hours` varchar(45) DEFAULT NULL,
   `course_times` varchar(45) DEFAULT NULL,
   `stu_id` char(50) NOT NULL,
@@ -149,8 +149,7 @@ CREATE TABLE `t_contract` (
   UNIQUE KEY `code_UNIQUE` (`code`),
   KEY `type` (`type`),
   KEY `course_type` (`course_type`),
-  KEY `course_prd_id` (`course_prd_id`),
-  KEY `course_ses_id` (`course_ses_id`),
+  KEY `course_id` (`course_id`),
   KEY `stu_id` (`stu_id`),
   KEY `par_id` (`par_id`),
   KEY `org_id` (`org_id`),
@@ -190,7 +189,7 @@ CREATE TABLE `t_course_session` (
   `id` char(50) NOT NULL,
   `product_id` char(50) DEFAULT NULL,
   `name` varchar(100) DEFAULT NULL,
-  `type_name` varchar(45) DEFAULT NULL,
+  `type_id` int(10) DEFAULT NULL,
   `hours` decimal(4,2) DEFAULT NULL,
   `start_date` date DEFAULT NULL,
   `end_date` date DEFAULT NULL,
@@ -272,10 +271,10 @@ DROP TABLE IF EXISTS `t_id_type`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `t_id_type` (
-  `id` int(1) NOT NULL,
+  `id` int(1) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
