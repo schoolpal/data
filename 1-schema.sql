@@ -111,7 +111,7 @@ DROP TABLE IF EXISTS `t_contract`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `t_contract` (
   `id` char(50) NOT NULL,
-  `type` varchar(45) NOT NULL,
+  `type_id` int(1) NOT NULL,
   `code` varchar(45) NOT NULL,
   `start_date` date DEFAULT NULL,
   `end_date` date DEFAULT NULL,
@@ -147,7 +147,7 @@ CREATE TABLE `t_contract` (
   `create_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `code_UNIQUE` (`code`),
-  KEY `type` (`type`),
+  KEY `type_id` (`type_id`),
   KEY `course_type` (`course_type`),
   KEY `course_id` (`course_id`),
   KEY `stu_id` (`stu_id`),
@@ -157,6 +157,21 @@ CREATE TABLE `t_contract` (
   KEY `creator_id` (`creator_id`),
   KEY `executive_id` (`executive_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_contract_type`
+--
+
+DROP TABLE IF EXISTS `t_contract_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_contract_type` (
+  `id` int(1) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
