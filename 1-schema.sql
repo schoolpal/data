@@ -749,6 +749,21 @@ CREATE TABLE `t_widget_type` (
 -- Dumping events for database 'schoolpal'
 --
 
+/*==============================================================*/
+/*
+    Event: e_update_index
+    每日切换序号前缀。提前生成前缀以便于组织序号的时候减少计算量。
+*/
+/*==============================================================*/
+DROP EVENT IF EXISTS e_update_index;
+DELIMITER ;;
+CREATE EVENT e_update_index
+ON SCHEDULE EVERY 1 DAY STARTS TIMESTAMP '2016-01-01 00:00:00'
+DO
+BEGIN
+    UPDATE t_index SET c_current = 0, c_prefix = DATE_FORMAT(now(), '%y%m%d');
+END ;;
+DELIMITER ;
 --
 -- Dumping routines for database 'schoolpal'
 --
