@@ -455,16 +455,17 @@ DROP TABLE IF EXISTS `t_log`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `t_log` (
-  `c_id` char(50) NOT NULL,
-  `c_creator` char(50) DEFAULT NULL,
-  `c_create_time` datetime DEFAULT NULL,
-  `c_type` varchar(50) DEFAULT NULL,
-  `c_title` varchar(50) DEFAULT NULL,
-  `c_desc` varchar(2048) DEFAULT NULL,
-  `c_debug` text,
-  `c_service_ip` varchar(50) DEFAULT NULL,
-  `c_user_ip` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`c_id`)
+  `id` char(50) NOT NULL,
+  `datetime` datetime DEFAULT NULL,
+  `level` varchar(10) DEFAULT NULL,
+  `message` varchar(255) DEFAULT NULL,
+  `user_id` char(50) DEFAULT NULL,
+  `user_name` char(50) DEFAULT NULL,
+  `ip` varchar(50) DEFAULT NULL,
+  `invocation` varchar(100) DEFAULT NULL,
+  `args` text DEFAULT NULL,
+  `return` text DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
